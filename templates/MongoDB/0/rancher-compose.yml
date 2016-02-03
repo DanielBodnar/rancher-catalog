@@ -30,5 +30,7 @@ mongo-cluster:
     mongo:
       yml:
         replset.name: "${replset_name}"
+        replset.mongoconf_image: "${mongoconf_image}"
+        replset.host_label: "${host_label}"
 
 
