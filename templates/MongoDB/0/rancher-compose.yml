@@ -10,20 +10,24 @@
       type: "string"
       required: true
       default: "bitbuilder"
-  questions:
     - variable: mongoconf_image
       description: "docker image with mongodb-config files"
       label: "MongoDB Conf Image"
       type: "string"
       required: true
-      default: "danielbodnar/mongodb-conf:${replset_name}"
-  questions:
+      default: "danielbodnar/mongodb-conf:bitbuilder"
     - variable: host_label
       description: "host label affinity"
-      label: "Affinity"
+      label: "Host Affinity"
       type: "string"
       required: true
       default: "role.db=1"
+    - variable: mongo_version
+      description: "mongodb version"
+      label: "MongoDB Version"
+      type: "string"
+      required: true
+      default: "3.2.1"
 mongo-cluster:
   scale: 3
   metadata:
@@ -32,5 +36,4 @@ mongo-cluster:
         replset.name: "${replset_name}"
         replset.mongoconf_image: "${mongoconf_image}"
         replset.host_label: "${host_label}"
-
-
+        replset.mongo_version: "${mongo_version}"
