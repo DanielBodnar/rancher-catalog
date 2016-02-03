@@ -11,6 +11,7 @@ mongo-cluster:
   labels:
     io.rancher.container.hostname_override: container_name
     io.rancher.sidekicks: mongo-base, mongo-datavolume
+    io.rancher.scheduler.affinity:host_label: "${host_label}"
   volumes_from:
     - mongo-datavolume
     - mongo-base
@@ -21,7 +22,8 @@ mongo-base:
   labels:
     io.rancher.container.hostname_override: container_name
     io.rancher.container.start_once: true
-  image: rancher/mongodb-conf:v0.1.0
+    io.rancher.scheduler.affinity:host_label: "${host_label}"
+  image: "${mongoconf_image}"
   stdin_open: true
   entrypoint: /bin/true
 mongo-datavolume:
@@ -29,6 +31,7 @@ mongo-datavolume:
   labels:
     io.rancher.container.hostname_override: container_name
     io.rancher.container.start_once: true
+    io.rancher.scheduler.affinity:host_label: "${host_label}"
   volumes:
     - /data/db
   entrypoint: /bin/true
